@@ -14,6 +14,8 @@ const book = "/books"
 
 module.exports = {
 
+    // region book
+
     book:{
         bookRootV1: baseV1 + book,
         bookCreate: "/",
@@ -22,4 +24,6 @@ module.exports = {
         bookUpdate: "/:bookID",
         bookDelete: "/:bookID",
     }
+
+    //endregion book
 }

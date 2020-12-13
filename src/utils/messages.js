@@ -1,5 +1,7 @@
 module.exports = {
 
+    // region book
+
     book:{
         bookCreated: "Book create successful",
         bookAll: "These are all books registered in the database",
@@ -10,4 +12,6 @@ module.exports = {
         bookNotFoundID: "There isn't book registered with this id in the database",
         bookAlreadyExist: "This book already exists in the database"
     }
+
+    // endregion book
 }
