@@ -1,28 +1,15 @@
 const routes = require("express").Router()
 
-routes.post("/", async (request, response) =>{
+const BookController = require("../controllers/bookController")
 
-    return response.status(200).json({ ok: "ok" })
-});
+routes.post("/", BookController.createBook);
 
-routes.get("/", async (request, response) =>{
+routes.get("/", BookController.selectBooks)
 
-    return response.status(200).json({ ok: "ok" })
-})
+routes.get("/:bookID", BookController.selectBook)
 
-routes.get("/:bookID", async (request, response) =>{
+routes.put("/:bookID", BookController.updateBook)
 
-    return response.status(200).json({ ok: "ok" })
-})
-
-routes.put("/:bookID", async (request, response) => {
-
-    return response.status(200).json({ ok: "ok" })
-})
-
-routes.delete("/:bookID", async (request, response) =>{
-
-    return response.status(200).json({ ok: "ok" })
-})
+routes.delete("/:bookID", BookController.deleteBook)
 
 module.exports = (app) => app.use("/books", routes)
