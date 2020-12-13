@@ -5,9 +5,9 @@ module.exports = {
     async createBook(request, response){
 
         try{
-            const { name, author } = request.body
+            const { title, author } = request.body
 
-            const result = await BookService.createBookAsync({name, author})
+            const result = await BookService.createBookAsync({title, author})
 
             return response.status(result.code).json(result)
         }catch (error) {
