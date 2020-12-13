@@ -1,11 +1,20 @@
+const Book = require("../models/book")
+
 module.exports = {
 
     async createBookAsync(body){
 
         try{
+            if(await Book.findOne({title: body.title, author: body.author}))
+                return {
+                    message: "",
+                    code: ""
+                }
+
+            const book = await Book.create(body)
 
             return {
-                body: "",
+                body: book,
                 message: "",
                 code: 201
             }
