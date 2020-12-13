@@ -1,6 +1,7 @@
 const Book = require("../models/book")
 
 const messages = require("../utils/messages")
+const statusCode = require("../utils/codeStatus")
 
 module.exports = {
 
@@ -10,7 +11,7 @@ module.exports = {
             if(await Book.findOne({title: body.title, author: body.author}))
                 return {
                     message: messages.book.bookAlreadyExist,
-                    code: 409
+                    code: statusCode.Status409Conflict
                 }
 
             const book = await Book.create(body)
@@ -18,12 +19,12 @@ module.exports = {
             return {
                 body: book,
                 message: messages.book.bookCreated,
-                code: 201
+                code: statusCode.Status201Created
             }
         }catch (error) {
             return {
                 message: error.message,
-                code: 500
+                code: statusCode.Status500InternalServerError
             }
         }
     },
@@ -36,18 +37,18 @@ module.exports = {
             if(!books)
                 return{
                     message: messages.book.bookNotFound,
-                    code: 404
+                    code: statusCode.Status404NotFound
                 }
 
             return {
                 body: books,
                 message: messages.book.bookAll,
-                code: 200
+                code: statusCode.Status200OK
             }
         }catch (error) {
             return {
                 message: error.message,
-                code: 500
+                code: statusCode.Status500InternalServerError
             }
         }
     },
@@ -60,18 +61,18 @@ module.exports = {
             if(!book)
                 return {
                     message: messages.book.bookNotFoundID,
-                    code: 404
+                    code: statusCode.Status404NotFound
                 }
 
             return {
                 body: book,
                 message: messages.book.bookID,
-                code: 200
+                code: statusCode.Status200OK
             }
         }catch (error) {
             return {
                 message: error.message,
-                code: 500
+                code: statusCode.Status500InternalServerError
             }
         }
     },
@@ -82,7 +83,7 @@ module.exports = {
             if(!await Book.findById(bookID))
                 return {
                     message: messages.book.bookNotFoundID,
-                    code: 404
+                    code: statusCode.Status404NotFound
                 }
 
             const book = await Book.findByIdAndUpdate(bookID, { ...body }, { new: true })
@@ -90,12 +91,12 @@ module.exports = {
             return {
                 body: book,
                 message: messages.book.bookUpdated,
-                code: 200
+                code: statusCode.Status200OK
             }
         }catch (error) {
             return {
                 message: error.message,
-                code: 500
+                code: statusCode.Status500InternalServerError
             }
         }
     },
@@ -107,7 +108,7 @@ module.exports = {
             if(!await Book.findById(bookID))
                 return{
                     message: messages.book.bookNotFoundID,
-                    code: 404
+                    code: statusCode.Status404NotFound
                 }
 
 
@@ -115,12 +116,12 @@ module.exports = {
 
             return {
                 message: messages.book.bookDeleted,
-                code: 204
+                code: statusCode.Status204NoContent
             }
         }catch (error) {
             return {
                 message: error.message,
-                code: 500
+                code: statusCode.Status500InternalServerError
             }
         }
     }
