@@ -5,6 +5,8 @@ const statusCode = require("../utils/codeStatus")
 
 module.exports = {
 
+    // region create
+
     async createBookAsync(body){
 
         try{
@@ -28,6 +30,10 @@ module.exports = {
             }
         }
     },
+
+    // endregion create
+
+    // region select
 
     async selectBooksAsync(){
 
@@ -77,6 +83,10 @@ module.exports = {
         }
     },
 
+    // endregion select
+    
+    // region update
+
     async updateBookAsync(body, bookID){
 
         try{
@@ -100,6 +110,10 @@ module.exports = {
             }
         }
     },
+
+    // endregion update
+
+    // region delete
 
     async deleteBookAsync(bookID){
 
@@ -125,4 +139,6 @@ module.exports = {
             }
         }
     }
+
+    // endregion delete
 }
