@@ -2,14 +2,16 @@ const routes = require("express").Router()
 
 const BookController = require("../controllers/bookController")
 
-routes.post("/", BookController.createBook);
+const route = require("../utils/apiRoute")
 
-routes.get("/", BookController.selectBooks)
+routes.post(route.book.bookCreate, BookController.createBook);
 
-routes.get("/:bookID", BookController.selectBook)
+routes.get(route.book.bookSelectAll, BookController.selectBooks)
 
-routes.put("/:bookID", BookController.updateBook)
+routes.get(route.book.bookSelectID, BookController.selectBook)
 
-routes.delete("/:bookID", BookController.deleteBook)
+routes.put(route.book.bookUpdate, BookController.updateBook)
 
-module.exports = (app) => app.use("/books", routes)
+routes.delete(route.book.bookDelete, BookController.deleteBook)
+
+module.exports = (app) => app.use(route.book.bookRootV1, routes)
