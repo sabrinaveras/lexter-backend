@@ -53,9 +53,16 @@ module.exports = {
     async selectBookAsync(bookID){
 
         try{
+            const book = await Book.findById(bookID)
+
+            if(!book)
+                return {
+                    message: "",
+                    code: 404
+                }
 
             return {
-                body: "",
+                body: book,
                 message: "",
                 code: 200
             }
@@ -70,9 +77,16 @@ module.exports = {
     async updateBookAsync(body, bookID){
 
         try{
+            if(!await Book.findById(bookID))
+                return {
+                    message: "",
+                    code: 404
+                }
+
+            const book = await Book.findByIdAndUpdate(bookID, { ...body }, { new: true })
 
             return {
-                body: "",
+                body: book,
                 message: "",
                 code: 200
             }
@@ -88,8 +102,16 @@ module.exports = {
 
         try{
 
+            if(!await Book.findById(bookID))
+                return{
+                    message: "",
+                    code: 404
+                }
+
+
+            await Book.findByIdAndDelete(bookID)
+
             return {
-                body: "",
                 message: "",
                 code: 204
             }
