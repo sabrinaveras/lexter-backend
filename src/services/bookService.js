@@ -1,5 +1,7 @@
 const Book = require("../models/book")
 
+const messages = require("../utils/messages")
+
 module.exports = {
 
     async createBookAsync(body){
@@ -7,15 +9,15 @@ module.exports = {
         try{
             if(await Book.findOne({title: body.title, author: body.author}))
                 return {
-                    message: "",
-                    code: ""
+                    message: messages.book.bookAlreadyExist,
+                    code: 409
                 }
 
             const book = await Book.create(body)
 
             return {
                 body: book,
-                message: "",
+                message: messages.book.bookCreated,
                 code: 201
             }
         }catch (error) {
@@ -33,13 +35,13 @@ module.exports = {
 
             if(!books)
                 return{
-                    message: "",
+                    message: messages.book.bookNotFound,
                     code: 404
                 }
 
             return {
                 body: books,
-                message: "",
+                message: messages.book.bookAll,
                 code: 200
             }
         }catch (error) {
@@ -57,13 +59,13 @@ module.exports = {
 
             if(!book)
                 return {
-                    message: "",
+                    message: messages.book.bookNotFoundID,
                     code: 404
                 }
 
             return {
                 body: book,
-                message: "",
+                message: messages.book.bookID,
                 code: 200
             }
         }catch (error) {
@@ -79,7 +81,7 @@ module.exports = {
         try{
             if(!await Book.findById(bookID))
                 return {
-                    message: "",
+                    message: messages.book.bookNotFoundID,
                     code: 404
                 }
 
@@ -87,7 +89,7 @@ module.exports = {
 
             return {
                 body: book,
-                message: "",
+                message: messages.book.bookUpdated,
                 code: 200
             }
         }catch (error) {
@@ -104,7 +106,7 @@ module.exports = {
 
             if(!await Book.findById(bookID))
                 return{
-                    message: "",
+                    message: messages.book.bookNotFoundID,
                     code: 404
                 }
 
@@ -112,7 +114,7 @@ module.exports = {
             await Book.findByIdAndDelete(bookID)
 
             return {
-                message: "",
+                message: messages.book.bookDeleted,
                 code: 204
             }
         }catch (error) {
