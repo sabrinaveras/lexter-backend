@@ -29,9 +29,16 @@ module.exports = {
     async selectBooksAsync(){
 
         try{
+            const books = await Book.find()
+
+            if(!books)
+                return{
+                    message: "",
+                    code: 404
+                }
 
             return {
-                body: "",
+                body: books,
                 message: "",
                 code: 200
             }
