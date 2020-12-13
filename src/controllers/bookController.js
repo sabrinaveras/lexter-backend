@@ -2,6 +2,8 @@ const BookService = require("../services/bookService")
 
 module.exports = {
 
+    // region create
+
     async createBook(request, response){
 
         try{
@@ -14,6 +16,10 @@ module.exports = {
             return response.status(500).json({ error: error.message})
         }
     },
+
+    // endregion create
+
+    // region select
 
     async selectBooks(request, response){
 
@@ -38,6 +44,10 @@ module.exports = {
         }
     },
 
+    // endregion select
+
+    // region update
+
     async updateBook(request, response){
 
         try{
@@ -49,6 +59,10 @@ module.exports = {
         }
     },
 
+    // endregion update
+
+    // region delete
+
     async deleteBook(request, response){
 
         try{
@@ -59,4 +73,6 @@ module.exports = {
             return response.status(500).json({ error: error.message})
         }
     }
+
+    // endregion delete
 }

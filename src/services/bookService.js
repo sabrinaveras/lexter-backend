@@ -84,7 +84,7 @@ module.exports = {
     },
 
     // endregion select
-    
+
     // region update
 
     async updateBookAsync(body, bookID){
